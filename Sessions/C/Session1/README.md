@@ -65,6 +65,18 @@ C supports various data types:
 
 Each data type has a specific size and range, which you need to consider while working with variables.
 
+can you predict x ?
+   ```c
+   short x = 32768 ;
+   printf("%d" , x);
+   ```
+can you predict x ?
+   ```c
+   char x = 142 ;
+   printf("%d" , x);
+   ```
+Can you tell me What is the size of int?
+   The size of the int data type in C can vary depending on the platform and compiler being used. In most cases, the int data type has a size of 4 bytes     or 32 bits. However, it's important to note that the size of int can be different on different systems.
 ## Integer and Float Conversion
 
 C provides automatic conversion between integers and floats when performing arithmetic operations. For example:
@@ -73,6 +85,17 @@ C provides automatic conversion between integers and floats when performing arit
 - `float / float` results in a `float`.
 - `float / int` results in a `float`.
 
+can you predict the result?
+   ```c
+   float x,y,z;
+   int result;
+   result = x*y*z /100 + 32/4 -3*1.1; 
+   printf("%d",result);
+   ```
+so x equal to ?
+   ```c
+   float x = 2/3 +5;       VS      float x = 2/3.0 + 5;
+   ```
 Explicit conversion (type casting) can also be used to convert variables from one type to another.
 
 ## Type Conversion: Implicit, Explicit (Type Casting)
@@ -80,10 +103,37 @@ Explicit conversion (type casting) can also be used to convert variables from on
 Type conversion in C can be either implicit or explicit. Implicit conversion occurs automatically, while explicit conversion (type casting) requires the programmer to specify the conversion explicitly.
 
 The type conversion hierarchy in C is as follows: `char` -> `short` -> `int` -> `unsigned int` -> `long int` -> `unsigned long int` -> `float` -> `double` -> `long double`.
+X,z?
+   ```c
+   int x = 10;
+   char y = 'a'; //a in ASCII eual to 97
+        
+   x = x + y ;
+   float z = x + 1.0 ;
+   ```
+sum ?
+   ```c
+   double x= 1.2 ;
+   int sum = (int) x + 1;
+   ```
 
 ## C Input/Output
 
 C provides input and output (I/O) functions for reading and writing data. The most commonly used functions are `printf()` for output and `scanf()` for input. It's important to understand the format specifiers used with `printf()` to correctly print different data types.
+
+basic operation >
+   ```c
+   int Tempreture;
+   printf("Enter Tempreture");
+   scanf("%d",&Tempreture);
+   printf("Tempreture is : %d",Tempreture);
+   ```
+printf return ?
+   ```c
+   int x; 
+   x = printf("hello IEEE\n");
+   printf("%d",x);
+   ```
 
 ## Mathematical & Logical Operations
 
@@ -121,16 +171,45 @@ C provides input/output functions (`printf()`, `scanf()`) for reading input from
 
 C supports a wide range of operations, including mathematical and logical operations. Understanding the order of operations (`()`, `*`, `/`, `%`, `-`, `+`) ensures correct execution and desired results.
 
+            ==> Correctly Execute
+                () , / * % , - +
+> i?
+   ```c
+   i = 2 * 3 / 4 + 4 / 4 + 8 - 2 + 5 / 8
+   ```
+>
+   ```c
+   x = ( x + y )* z                VS              x = x + y * z ;
+   ```
+
+
 ## Post Increment vs Pre Increment
 
 In C, the post-increment (`x++`) and pre-increment (`++x`) operators are used to increment the value of a variable. The difference lies in the order of operations and the value returned
 
-.
+>
+   ```c
+   int x =1;
+   x++;
+   ++x;
+   printf("%d ",++x);
+   ```
+x,y ?
+>
+   ```c
+   int x = 1;
+   int y = 0;
+   y = x++ + x++; 
+   printf("%d , %d",x,y); .
+   ```
 
 ## Right to Left or Left to Right
-
+x?
+   ```c
+   int x = 10;
+   printf("%d , %d",++x,x++);
+   ```
 C follows a specific order of evaluation for expressions. Understanding whether an expression is evaluated from right to left or left to right is crucial for determining the output.
 
-Please note that this README provides an overview of the topics covered in this repository. For detailed explanations and code examples, refer to the respective files and documentation within the repository.
 
 Feel free to explore the code and enhance your understanding of Embedded Systems and C programming. Happy coding!
