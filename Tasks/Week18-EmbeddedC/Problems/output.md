@@ -1,95 +1,76 @@
-# Identifiers
+# Function Pointers and Array Sum
 
-Identifiers are the names that are given to various program elements such as variables, symbolic constants, and functions.
+This repository includes two tasks:
 
-## Rules to Know when Talking about Identifiers:
-- An identifier name must be a sequence of letters and digits and must begin with a letter.
-- Names shouldn't be a keyword (such as int, float, if, break, for, etc.).
-- No special characters, such as semicolon, period, blank space, slash, or comma, are permitted.
+## Task 1: Function Pointers
 
-## Optimization
+### Description
+In this task, we have implemented a C program that demonstrates the use of function pointers to perform basic arithmetic operations. Four functions (`add`, `sub`, `mult`, and `div`) are defined, each of which performs a specific arithmetic operation on two integers. The `calculate` function takes two integers and a function pointer as arguments and calls the specified operation function using the function pointer.
 
-Optimization is used to:
-- Reduce the number of instructions.
-- Decrease memory access time.
-- Minimize power consumption.
+### Code
+```c
+#include <stdio.h>
 
-### Optimization Levels:
-1. Level 00:
-   - No optimization.
-   - Can be used when debugging.
-   - Fastest compilation time.
+// Function prototypes
+int add(int a, int b);
+int sub(int a, int b);
+int mult(int a, int b);
+int div(int a, int b);
+int calculate(int a, int b, int (*operation)(int, int));
 
-2. Level 01:
-   - Moderate to decrease memory access and code spaces.
+int main() {
+    int num1 = 10, num2 = 5;
+    int result;
 
-3. Level 02:
-   - Not debugging-friendly.
-   - Slow compilation.
+    result = calculate(num1, num2, add);
+    printf("Addition: %d\n", result);
 
-4. Level 03:
-   - Full optimization with aggressive steps.
-   - Slowest compilation time.
-   - May cause bugs.
-   - Not debugging-friendly.
+    result = calculate(num1, num2, sub);
+    printf("Subtraction: %d\n", result);
 
-## `volatile` Type Qualifier
+    result = calculate(num1, num2, mult);
+    printf("Multiplication: %d\n", result);
 
-The `volatile` keyword in C is a qualifier that tells the compiler that the value of the variable may change at any time. It prevents the compiler from optimizing operations related to that variable.
+    result = calculate(num1, num2, div);
+    printf("Division: %d\n", result);
 
-### Proper Use of the `volatile` Keyword:
-- Memory-mapped peripheral registers.
-- Global variables modified by an ISR.
-- Global variables modified by multiple tasks within multi-thread applications.
+    return 0;
+}
+```
 
-## Variable Definition VS Variable Declaration
+### Output
+![Task 1 Output](![code png](https://github.com/AhmedAdelWafdy7/IEEE/assets/107740350/8f24d3c4-7021-49fd-b65d-7363b0133c21)
+ng)
 
-- Definition: A variable is defined when the compiler allocates storage for the variable.
-- Declaration: A variable is declared when the compiler is informed about the variable's existence and type.
+## Task 2: Array Sum
 
-## Functions
+### Description
+In this task, we have implemented a C program that calculates the sum of elements in an integer array using pointers. The `findArraySum` function takes an integer array and its size as arguments, and it returns the sum of all elements in the array.
 
-Functions consist of:
-- Function Name: Should follow the rules for identifiers.
-- Input Parameters: The types and names of the parameters.
-- Return Type: The data type of the function output, use `void` if there is no output.
-- Function Body: Performs the specific function operation.
-- Return Statement: Indicates the completion of the function execution and supplies the output to the caller.
+### Code
+```c
+#include <stdio.h>
 
-### Pass by Value VS Pass by Reference:
-- Pass by Value: The value of the argument is copied into the function parameter. Changes inside the function do not affect the argument.
-- Pass by Reference: The address of the argument is passed into the function parameter. Changes inside the function affect the argument.
+// Function prototype
+int findArraySum(int arr[], int size);
 
-## Storage Class in C
+int main() {
+    int arr1[] = {1, 2, 3};
+    int arr2[] = {15, 12, 13, 10};
 
-Storage Class in C determines the scope, lifetime, and visibility of a variable or function.
+    int sum1 = findArraySum(arr1, sizeof(arr1) / sizeof(arr1[0]));
+    int sum2 = findArraySum(arr2, sizeof(arr2) / sizeof(arr2[0]));
 
-1. `auto`:
-   - Automatic variables are allocated memory automatically at runtime.
-   - Their visibility is limited to the block in which they are defined.
-   - Local variables are automatic in C by default.
-   - Automatic variables are initialized to garbage by default.
+    printf("Sum of arr1: %d\n", sum1);
+    printf("Sum of arr2: %d\n", sum2);
 
-2. `extern`:
-   - The external storage class is used to declare variables with external linkage.
-   - It indicates that the variable is defined elsewhere in the program.
-   - Variables declared as `extern` are not allocated any memory.
-   - Default initial value of external integral type is 0, otherwise null.
-   - Can only be initialized as a global variable.
+    return 0;
+}
+```
 
-3. `static`:
-   - Static variables hold their value between multiple function calls as they are stored in Data Memory.
-   - The visibility of static local variables is limited to the function or block in which they are defined.
-   - A static variable can be declared multiple times but assigned only once.
-   - Default initial value of static integral variable is 0, otherwise null.
-   - The visibility of static global variable is limited to the file in which it is declared.
+### Output
+![Task 2 Output](code.p![Task2 c - C_session1 - Visual Studio Code 7_19_2023 4_14_26 PM](https://github.com/AhmedAdelWafdy7/IEEE/assets/107740350/219f8262-ddaa-4b80-ab77-80b89b820796)
+ng)
 
-## Preprocessor Directives
-
-Before a C program is compiled, the source code is processed by a program called the preprocessor. Preprocessor directives begin with the `#` symbol.
-
-1. Macros:
-   - Macros are text replacements in code.
-   - They are written using `#define` preprocessor directives.
-   - No semicolon is needed to end a macro definition.
+Note: The output screenshot for both tasks is provided in `code.png` file.
 
