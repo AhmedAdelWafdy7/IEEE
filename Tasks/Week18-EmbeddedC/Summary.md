@@ -1,95 +1,54 @@
-# Identifiers
+# README.md
 
-Identifiers are the names that are given to various program elements such as variables, symbolic constants, and functions.
+## Pointer
+A pointer is a variable that holds a memory address. This address is the location of another object (typically another variable) in memory. For example, if one variable contains the address of another variable, the first variable is said to point to the second.
 
-## Rules to Know when Talking about Identifiers:
-- An identifier name must be a sequence of letters and digits and must begin with a letter.
-- Names shouldn't be a keyword (such as int, float, if, break, for, etc.).
-- No special characters, such as semicolon, period, blank space, slash, or comma, are permitted.
+### Why do we need Pointers?
+- Configure the peripheral register addresses.
+- Read/Write into peripheral data registers.
 
-## Optimization
+### Pointer Size
+- Pointers generally have a fixed size, depending upon different factors like the operating system and CPU architecture.
+- The pointer size is equivalent to the memory location address size.
 
-Optimization is used to:
-- Reduce the number of instructions.
-- Decrease memory access time.
-- Minimize power consumption.
+## typedef
+The `typedef` keyword in C is used to create an alias name for user-defined data types or primitive and derived data types.
 
-### Optimization Levels:
-1. Level 00:
-   - No optimization.
-   - Can be used when debugging.
-   - Fastest compilation time.
+Syntax: `typedef <primitive or derived data type> <new_name>;`
 
-2. Level 01:
-   - Moderate to decrease memory access and code spaces.
+## Compilation Process
+When we want to write a program, it goes through a flow called the compilation process, which consists of stages:
 
-3. Level 02:
-   - Not debugging-friendly.
-   - Slow compilation.
+1. Compiler Stage:
+   - Preprocessing stage: Resolves preprocessing directives, macros, `#include`, `#ifdef`, etc. The input of this stage is `app.c`, and the output is `app.i`.
+   - Code generating stage: Converts higher-level language code (C) into assembly. The input of this stage is `app.i`, and the output is `app.s`.
+   - Assembler stage: Converts assembly into an object file. The input of this stage is `app.s`, and the output is `app.o`.
 
-4. Level 03:
-   - Full optimization with aggressive steps.
-   - Slowest compilation time.
-   - May cause bugs.
-   - Not debugging-friendly.
+2. Linker Stage:
+   - Resolves symbols and relocates data and code. After generating the object file `app.o`, the linker links libraries, linker script, and this object file together to generate an executable file and debug file (e.g., `app.elf` / `app.hex` / `app.bi` / `app.out`).
 
-## `volatile` Type Qualifier
+Compile-time binding: The object file has virtual addresses, while linking puts absolute addresses that already exist in physical memory.
 
-The `volatile` keyword in C is a qualifier that tells the compiler that the value of the variable may change at any time. It prevents the compiler from optimizing operations related to that variable.
+## Startup
+Startup code is code that runs before `main()` starts executing. The startup code is located inside the executable file.
+Startup code can be written in two ways:
+1. `.c` C file
+2. `.s` assembly
 
-### Proper Use of the `volatile` Keyword:
-- Memory-mapped peripheral registers.
-- Global variables modified by an ISR.
-- Global variables modified by multiple tasks within multi-thread applications.
+Startup Actions:
+1. Disable all interrupts.
+2. Create a vector table from the MCU.
+3. Copy `.data` section from ROM to RAM.
+4. Zero uninitialized data (`.bss` section).
+5. Allocate space and initialize the stack.
+6. Initialize the processor Stack Pointer (SP).
+7. Create and initialize the heap (if applicable).
+8. Enable interrupts.
+9. Call `main()`.
 
-## Variable Definition VS Variable Declaration
+## Linker Script
+The linker script is a text file that specifies:
+1. The available memory.
+2. How to use memory.
 
-- Definition: A variable is defined when the compiler allocates storage for the variable.
-- Declaration: A variable is declared when the compiler is informed about the variable's existence and type.
-
-## Functions
-
-Functions consist of:
-- Function Name: Should follow the rules for identifiers.
-- Input Parameters: The types and names of the parameters.
-- Return Type: The data type of the function output, use `void` if there is no output.
-- Function Body: Performs the specific function operation.
-- Return Statement: Indicates the completion of the function execution and supplies the output to the caller.
-
-### Pass by Value VS Pass by Reference:
-- Pass by Value: The value of the argument is copied into the function parameter. Changes inside the function do not affect the argument.
-- Pass by Reference: The address of the argument is passed into the function parameter. Changes inside the function affect the argument.
-
-## Storage Class in C
-
-Storage Class in C determines the scope, lifetime, and visibility of a variable or function.
-
-1. `auto`:
-   - Automatic variables are allocated memory automatically at runtime.
-   - Their visibility is limited to the block in which they are defined.
-   - Local variables are automatic in C by default.
-   - Automatic variables are initialized to garbage by default.
-
-2. `extern`:
-   - The external storage class is used to declare variables with external linkage.
-   - It indicates that the variable is defined elsewhere in the program.
-   - Variables declared as `extern` are not allocated any memory.
-   - Default initial value of external integral type is 0, otherwise null.
-   - Can only be initialized as a global variable.
-
-3. `static`:
-   - Static variables hold their value between multiple function calls as they are stored in Data Memory.
-   - The visibility of static local variables is limited to the function or block in which they are defined.
-   - A static variable can be declared multiple times but assigned only once.
-   - Default initial value of static integral variable is 0, otherwise null.
-   - The visibility of static global variable is limited to the file in which it is declared.
-
-## Preprocessor Directives
-
-Before a C program is compiled, the source code is processed by a program called the preprocessor. Preprocessor directives begin with the `#` symbol.
-
-1. Macros:
-   - Macros are text replacements in code.
-   - They are written using `#define` preprocessor directives.
-   - No semicolon is needed to end a macro definition.
-
+It reflects the memory resources and memory map of the target MCU.
